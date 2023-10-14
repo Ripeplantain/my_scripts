@@ -8,6 +8,13 @@
         # Updated:- October 14 2023
         # Usage:- create_react.sh
 
+echo "Add typescript y or n"
+read message
 
-npm create vite@latest ./ -- --template react
+if [ "$message" == "y" ]; then
+    npm init vite@latest ./ -- --template react-ts
+else
+    npm init vite@latest ./ -- --template react
+fi
+
 
