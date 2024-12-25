@@ -14,17 +14,17 @@
 set -x 
 
 # Run Update
-sudo apt update
+sudo apt update -y
 
 #Install Nginx
-sudo apt install nginx
+sudo apt install nginx -y
 
 sudo ufw allow 'Nginx Http'
 
 #Install Docker
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
 
-sudo apt install ca-certificates curl
+sudo apt install ca-certificates curl -y
 
 sudo install -m 0755 -d /etc/apt/keyrings
 
@@ -37,17 +37,20 @@ echo \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-sudo apt update
+sudo apt update -y
 
-sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
 # Installing MySql
 # sudo apt install mysql-server
 
-# sudo systemctl start mysql.service
+sudo systemctl start mysql.service
 
-# sudo mysql
+sudo systemctl enable mysql.service
 
-# ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+MYSQL_ROOT_PASSWORD='password'
 
-# exit
+sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH 'mysql_native_password' BY '${MYSQL_ROOT_PASSWORD}';"
+sudo mysql -e "FLUSH PRIVILEGES;"
+
+exit
