@@ -14,7 +14,7 @@
 set -x 
 
 # Run Update
-sudo apt upate
+sudo apt update
 
 #Install Nginx
 sudo apt install nginx
