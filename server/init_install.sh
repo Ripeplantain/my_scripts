@@ -44,6 +44,8 @@ sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 # Installing MySql
 # sudo apt install mysql-server
 
+sudo apt install mysql-server
+
 sudo systemctl start mysql.service
 
 sudo systemctl enable mysql.service
