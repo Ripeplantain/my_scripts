@@ -44,15 +44,22 @@ sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 # Installing MySql
 # sudo apt install mysql-server
 
-sudo apt install mysql-server
+sudo apt install mysql-server -y
 
 sudo systemctl start mysql.service
 
 sudo systemctl enable mysql.service
 
+MYSQL_ROOT_USER=root
 MYSQL_ROOT_PASSWORD='password'
 
-sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH 'mysql_native_password' BY '${MYSQL_ROOT_PASSWORD}';"
-sudo mysql -e "FLUSH PRIVILEGES;"
+NEW_USER=ubuntu
+NEW_PASSWORD=password
 
-exit
+DATABASED=test_db
+
+mysql -u"$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" <<EOF
+CREATE USER '$NEW_USER'@'localhost' IDENTIFIED BY '$NEW_PASSWORD';
+GRANT ALL PRIVELEGES ON $DATABASE.* TO '$NEW_USER'@'localhost';
+FLUSH PRIVELEGES;
+EOF
