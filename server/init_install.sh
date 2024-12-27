@@ -59,11 +59,12 @@ NEW_PASSWORD=password
 DATABASED=test_db
 
 sudo mysql -u"$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" <<EOF
-CREATE DATABASE IF NOT EXISTS \`$DATABASE\`;
-CREATE USER '$NEW_USER'@'localhost' IDENTIFIED BY '$NEW_PASSWORD';
-GRANT ALL PRIVILEGES ON \`$DATABASE\`.* TO '$NEW_USER'@'localhost';
+CREATE DATABASE IF NOT EXISTS test_db;
+CREATE USER 'ubuntu'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON test_db.* TO 'ubuntu'@'localhost';
 FLUSH PRIVILEGES;
 EOF
+
 
 if [ $? -eq 0 ]; then
     echo "User $NEW_USER created and granted privileges on $DATABASE successfully."
